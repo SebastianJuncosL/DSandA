@@ -44,65 +44,29 @@ void suma()
 
 // 3-------------------------------------------------------------------------
 
-// void palabraRepetida()
-// {
-//     string palabra;
-//     string oracion;
-//     int count = 0;
-//     int j=0;
-//     char dummy;
-//     std::cout << "Introduce una oración:\t";
-//     getline(cin, oracion);
-//     std::cout << "Introduce una palabra:\t";
-//     cin>>palabra;
-//     int palabraLength = palabra.length();
-//     // for (char const &c:oracion)
-//     // {
-//     //     if (c == palabra[i])
-//     //     {
-//     //         count++;
-//     //         i++;
-//     //     }
-//     //     else if(c!= palabra[i])
-//     //         i=0;
-//     //     if (i<= palabraLength)
-//     //     {
-            
-//     //         cout<<c<<" "<<i<<" "<<count<<"\n";
-//     //         i=0;
-//     //     } 
-//     // }
-
-//     // for(char const &c:oracion)
-//     // {
-//     //     dummy = c;
-//     //     if(c==palabra[0])
-//     //     {
-//     //         dummy=oracion[c+palabraLength];
-//     //         std::cout << dummy << std::endl;
-//     //         if(dummy == palabra[palabraLength-1])
-//     //             count++;            
-//     //     }
-//     //     cout<<c<<"\n";
-//     // }
-//     std::cout << "La palabra '"<< palabra<<"' se repite "<< count<<" veces"<< std::endl;
-//     char dummy2;
-//     for(char const &c:oracion)
-//     {
-//         j++;
-//         if(c == palabra[0])
-//         {
-//             for (int i = 0; i < palabraLength; i++)
-//             {
-//                 dummy=palabra[i];
-//                 dummy2=oracion[j+i];
-//                 cout<<dummy2<<"\n";
-//             }
-//             if(dummy==dummy2)
-//                 count++;
-//         }
-//     }
-// }
+void repetidas()
+{
+    string palabra, oracion;
+    int letters=0, count =0, j=0,k=0;
+    std::cout << "Introduce una oración:\t";
+    getline(cin, oracion);
+    std::cout << "Introduce una palabra:\t";
+    cin>>palabra;
+    for (int i = 0; i < oracion.length(); i++)
+    {
+        cout<<oracion[i]<<"\n";
+        if ((oracion[i] == palabra[0] && oracion[i-1] == ' ')||(oracion[0] == palabra[0]))
+        {
+            j=i;
+            k=j+(palabra.length()-1);
+            if(oracion[j] == palabra[0] && oracion[k] == palabra[palabra.length()-1])
+                count++;
+        }
+        else   
+            continue;
+    }
+    std::cout << "La palabra '"<< palabra<<"' se repite "<< count<<" veces"<< std::endl;
+}
 
 // 4-------------------------------------------------------------------------
 
@@ -119,7 +83,6 @@ class Animal
 
 int main(int argc, char const *argv[])
 {
-    bisiesto();
-    suma();
+    repetidas();
     return 0;
 }

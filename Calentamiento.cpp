@@ -4,21 +4,17 @@ using namespace std;
 
 // 1-------------------------------------------------------------------------
 
-void bisisto()
+void bisiesto()
 {
-    int year;
+    int year=0;
     std::cout << "Introduce el año: ";
     cin>> year;
     if(year%4==0 && year%100!=0)
-    {
         std::cout << "El año "<< year << " es bisiesto" << std::endl;
-        return;
-    }
-    if(year%4 == 0 && year%100 == 0 && year%400 == 0)
-    {
+    else if(year%4 == 0 && year%100 == 0 && year%400 == 0)
         std::cout << "El año "<< year << " es bisiesto" << std::endl;
-        return;
-    }
+    else 
+        std::cout << "El año no es biciesto" << std::endl;
 }
 
 // 2-------------------------------------------------------------------------
@@ -26,9 +22,7 @@ void bisisto()
 void suma()
 {
     int *numeros;
-    int cantidad = 0;
-    int numActual = 0;
-    int resultado;
+    int cantidad = 0, numActual = 0, resultado;
     std::cout << "Cuántos numeros quieres introducir?\t";
     cin>> cantidad;
     numeros = new int[cantidad];
@@ -44,7 +38,7 @@ void suma()
         cout<<numeros[i]<<" ";
         resultado+=numeros[i];
     }
-    std::cout << " es "<< resultado << std::endl;
+    std::cout << "es "<< resultado << std::endl;
     delete []numeros;
 }
 
@@ -125,5 +119,7 @@ class Animal
 
 int main(int argc, char const *argv[])
 {
+    bisiesto();
+    suma();
     return 0;
 }

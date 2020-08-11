@@ -70,19 +70,73 @@ void repetidas()
 
 // 4-------------------------------------------------------------------------
 
-
+template <class C>
+class Calculadora
+{
+public:
+    C sumar(C a, C b){return a+b;};
+    C restar(C a, C b){return a-b;};
+    C dividir(C a, C b){return a/b;};
+    C multiplicar(C a, C b){return a*b;};
+};
 
 // 5-------------------------------------------------------------------------
 
 class Animal
 {
-    
+public:
+    int patas;
+    bool pelo;
+    string llanto;
+    void hacerRuido(){std::cout << llanto << std::endl;}
 };
 
+class Perro:public Animal
+{
+public:
+    Perro(){llanto = "woof";};
+};
+class Gato:public Animal
+{
+public:
+    Gato(){llanto = "meow";};
+};
+class Perico:public Animal
+{
+public:
+    Perico(){llanto = "krraaa";};
+};
+class Serpiente:public Animal
+{
+public:
+    Serpiente(){llanto = "ssssss";};
+};
+
+template <class T>
+class Veterinario
+{
+public:
+    void inyectarAnimal(T animal){animal.hacerRuido();};
+};
 // main----------------------------------------------------------------------
 
-int main(int argc, char const *argv[])
+int main()
 {
-    repetidas();
+    // bisiesto();
+    // suma();
+    // repetidas();
+    // Calculadora<int> calc;
+    // cout<<calc.sumar(5,4)<<"\n";
+    // Calculadora<float> cal;
+    // cout<<cal.dividir(5.4,3.2);
+    Perro a;
+    Gato b;
+    Serpiente c;
+    Veterinario<Perro> veta;
+    veta.inyectarAnimal(a);
+    Veterinario<Gato> vetb;
+    vetb.inyectarAnimal(b);
+    Veterinario<Serpiente> vetc;
+    vetc.inyectarAnimal(c);
     return 0;
 }

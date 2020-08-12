@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 // 1-------------------------------------------------------------------------
@@ -9,9 +10,7 @@ void bisiesto()
     int year=0;
     std::cout << "Introduce el año: ";
     cin>> year;
-    if(year%4==0 && year%100!=0)
-        std::cout << "El año "<< year << " es bisiesto" << std::endl;
-    else if(year%4 == 0 && year%100 == 0 && year%400 == 0)
+    if((year%4==0 && year%100!=0) || (year%4 == 0 && year%100 == 0 && year%400 == 0))
         std::cout << "El año "<< year << " es bisiesto" << std::endl;
     else 
         std::cout << "El año no es biciesto" << std::endl;
@@ -47,23 +46,24 @@ void suma()
 void repetidas()
 {
     string palabra, oracion;
-    int letters=0, count =0, j=0,k=0;
+    int count=0, j=0;
     std::cout << "Introduce una oración:\t";
     getline(cin, oracion);
     std::cout << "Introduce una palabra:\t";
     cin>>palabra;
     for (int i = 0; i < oracion.length(); i++)
     {
-        cout<<oracion[i]<<"\n";
-        if ((oracion[i] == palabra[0] && oracion[i-1] == ' ')||(oracion[0] == palabra[0]))
+        if ((oracion[0] == palabra[0])||(oracion[i-1] == ' ' && oracion[i] == palabra[0]))
         {
-            j=i;
-            k=j+(palabra.length()-1);
-            if(oracion[j] == palabra[0] && oracion[k] == palabra[palabra.length()-1])
-                count++;
+            for (j = 0; j < palabra.length(); j++)
+            {
+                if(oracion[i+j] == palabra[j])
+                    continue;
+                break;
+            }
+            if (j == palabra.length())
+                count++; 
         }
-        else   
-            continue;
     }
     std::cout << "La palabra '"<< palabra<<"' se repite "<< count<<" veces"<< std::endl;
 }
@@ -124,19 +124,19 @@ int main()
 {
     // bisiesto();
     // suma();
-    // repetidas();
+    repetidas();
     // Calculadora<int> calc;
     // cout<<calc.sumar(5,4)<<"\n";
     // Calculadora<float> cal;
     // cout<<cal.dividir(5.4,3.2);
-    Perro a;
-    Gato b;
-    Serpiente c;
-    Veterinario<Perro> veta;
-    veta.inyectarAnimal(a);
-    Veterinario<Gato> vetb;
-    vetb.inyectarAnimal(b);
-    Veterinario<Serpiente> vetc;
-    vetc.inyectarAnimal(c);
+    // Perro a;
+    // Gato b;
+    // Serpiente c;
+    // Veterinario<Perro> veta;
+    // veta.inyectarAnimal(a);
+    // Veterinario<Gato> vetb;
+    // vetb.inyectarAnimal(b);
+    // Veterinario<Serpiente> vetc;
+    // vetc.inyectarAnimal(c);
     return 0;
 }

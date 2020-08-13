@@ -75,6 +75,7 @@ void repetidas()
 {
     string palabra, oracion;
     int count = 0, j = 0, i = 0;
+    cin.ignore();
     std::cout << "Introduce una oración:\t";
     getline(cin, oracion);
     std::cout << "Introduce una palabra:\t";
@@ -160,7 +161,7 @@ public:
 int main()
 {
     // bisiesto();
-    // suma();
+    suma();
     repetidas();
     // Calculadora<int> calc;
     // cout<<calc.sumar(5,4)<<"\n";

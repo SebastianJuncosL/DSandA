@@ -21,7 +21,7 @@ void bisiesto()
 void suma()
 {
     int *numeros;
-    int cantidad = 0, numActual = 0, resultado;
+    int cantidad = 0, numActual = 0, resultado = 0;
     std::cout << "Cuántos numeros quieres introducir?\t";
     cin >> cantidad;
     numeros = new int[cantidad];

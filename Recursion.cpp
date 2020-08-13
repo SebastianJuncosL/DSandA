@@ -7,10 +7,17 @@ int multiply(int base, int times, int result)
 {
     if (times == 0)
         return result;
-    return multiply(base, times -= 1, result += base);
+    return multiply(base, times-=1, result += base);
 }
 
 // 2-------------------------------------------------------------------------
+
+int square(int base, int times, int result)
+{
+    if (times == 0)
+        return result;
+    return square(base, times-=1, result *= base);
+}
 
 // 3-------------------------------------------------------------------------
 
@@ -29,5 +36,6 @@ int multiply(int base, int times, int result)
 int main()
 {
     cout << multiply(6, 6, 0) << "\n";
+    std::cout << square(5,4,1) << std::endl;
     return 0;
 }

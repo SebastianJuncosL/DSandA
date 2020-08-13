@@ -85,14 +85,12 @@ void repetidas()
             break;
     }
     if (i == palabra.length())
-    {
         count++;
-    }
     i = 0;
 
     for (i = 0; i < oracion.length(); i++)
     {
-        if ((oracion[i - 1] == 32 && oracion[i] == palabra[0]) && (oracion[i + palabra.length()] == ' ' || oracion[i + palabra.length() + 1] == '\0'))
+        if ((oracion[i - 1] == 32 && oracion[i] == palabra[0]) && (oracion[i + palabra.length()] == 32 || oracion[i + palabra.length()] == '\0'))
         {
             for (j = 0; j < palabra.length(); j++)
             {

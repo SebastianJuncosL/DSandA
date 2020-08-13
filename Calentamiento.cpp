@@ -7,12 +7,12 @@ using namespace std;
 
 void bisiesto()
 {
-    int year=0;
+    int year = 0;
     std::cout << "Introduce el año: ";
-    cin>> year;
-    if((year%4==0 && year%100!=0) || (year%4 == 0 && year%100 == 0 && year%400 == 0))
-        std::cout << "El año "<< year << " es bisiesto" << std::endl;
-    else 
+    cin >> year;
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 4 == 0 && year % 100 == 0 && year % 400 == 0))
+        std::cout << "El año " << year << " es bisiesto" << std::endl;
+    else
         std::cout << "El año no es biciesto" << std::endl;
 }
 
@@ -23,49 +23,88 @@ void suma()
     int *numeros;
     int cantidad = 0, numActual = 0, resultado;
     std::cout << "Cuántos numeros quieres introducir?\t";
-    cin>> cantidad;
+    cin >> cantidad;
     numeros = new int[cantidad];
-    std::cout << "Introduce los "<< cantidad<< " numeros" << std::endl;
+    std::cout << "Introduce los " << cantidad << " numeros" << std::endl;
     for (int i = 0; i < cantidad; i++)
     {
-        cin>>numActual;
+        cin >> numActual;
         numeros[i] = numActual;
     }
     std::cout << "La suma de los numeros ";
     for (int i = 0; i < cantidad; i++)
     {
-        cout<<numeros[i]<<" ";
-        resultado+=numeros[i];
+        cout << numeros[i] << " ";
+        resultado += numeros[i];
     }
-    std::cout << "es "<< resultado << std::endl;
-    delete []numeros;
+    std::cout << "es " << resultado << std::endl;
+    delete[] numeros;
 }
 
 // 3-------------------------------------------------------------------------
 
+// void vectorRepetidas()
+// {
+//     vector<string> palabras;
+//     string oracion, palabra, palabraVector = "";
+//     int count = 0;
+//     std::cout << "Introduce una oración:\t";
+//     getline(cin, oracion);
+//     std::cout << "Introduce una palabra:\t";
+//     cin>>palabra;
+//     for (int i = 0; i <= oracion.length(); i++)
+//     {
+//         if (oracion[i] == ' ' || oracion[i]=='\0')
+//         {
+//             if (palabraVector != "")
+//                 palabras.push_back(palabraVector);
+//             palabraVector = "";
+//         }
+//         else
+//             palabraVector+=oracion[i];
+//     }
+//     for (int i = 0; i < palabras.size(); i++)
+//     {
+//         if (palabras[i] == palabra)
+//             count++;
+//     }
+//     std::cout << "La palabra '"<< palabra<<"' se repite "<< count<<" veces"<< std::endl;
+// }
+
 void repetidas()
 {
     string palabra, oracion;
-    int count=0, j=0;
+    int count = 0, j = 0, i = 0;
     std::cout << "Introduce una oración:\t";
     getline(cin, oracion);
     std::cout << "Introduce una palabra:\t";
-    cin>>palabra;
-    for (int i = 0; i < oracion.length(); i++)
+    cin >> palabra;
+    for (i = 0; i < palabra.length(); i++)
     {
-        if ((oracion[0] == palabra[0])||(oracion[i-1] == ' ' && oracion[i] == palabra[0]))
+        if (oracion[i] != palabra[i])
+            break;
+    }
+    if (i == palabra.length())
+    {
+        count++;
+    }
+    i = 0;
+
+    for (i = 0; i < oracion.length(); i++)
+    {
+        if ((oracion[i - 1] == 32 && oracion[i] == palabra[0]) && (oracion[i + palabra.length()] == ' ' || oracion[i + palabra.length() + 1] == '\0'))
         {
             for (j = 0; j < palabra.length(); j++)
             {
-                if(oracion[i+j] == palabra[j])
+                if (oracion[i + j] == palabra[j])
                     continue;
                 break;
             }
             if (j == palabra.length())
-                count++; 
+                count++;
         }
     }
-    std::cout << "La palabra '"<< palabra<<"' se repite "<< count<<" veces"<< std::endl;
+    std::cout << "La palabra '" << palabra << "' se repite " << count << " veces" << std::endl;
 }
 
 // 4-------------------------------------------------------------------------
@@ -74,10 +113,10 @@ template <class C>
 class Calculadora
 {
 public:
-    C sumar(C a, C b){return a+b;};
-    C restar(C a, C b){return a-b;};
-    C dividir(C a, C b){return a/b;};
-    C multiplicar(C a, C b){return a*b;};
+    C sumar(C a, C b) { return a + b; };
+    C restar(C a, C b) { return a - b; };
+    C dividir(C a, C b) { return a / b; };
+    C multiplicar(C a, C b) { return a * b; };
 };
 
 // 5-------------------------------------------------------------------------
@@ -88,35 +127,35 @@ public:
     int patas;
     bool pelo;
     string llanto;
-    void hacerRuido(){std::cout << llanto << std::endl;}
+    void hacerRuido() { std::cout << llanto << std::endl; }
 };
 
-class Perro:public Animal
+class Perro : public Animal
 {
 public:
-    Perro(){llanto = "woof";};
+    Perro() { llanto = "woof"; };
 };
-class Gato:public Animal
+class Gato : public Animal
 {
 public:
-    Gato(){llanto = "meow";};
+    Gato() { llanto = "meow"; };
 };
-class Perico:public Animal
+class Perico : public Animal
 {
 public:
-    Perico(){llanto = "krraaa";};
+    Perico() { llanto = "krraaa"; };
 };
-class Serpiente:public Animal
+class Serpiente : public Animal
 {
 public:
-    Serpiente(){llanto = "ssssss";};
+    Serpiente() { llanto = "ssssss"; };
 };
 
 template <class T>
 class Veterinario
 {
 public:
-    void inyectarAnimal(T animal){animal.hacerRuido();};
+    void inyectarAnimal(T animal) { animal.hacerRuido(); };
 };
 // main----------------------------------------------------------------------
 

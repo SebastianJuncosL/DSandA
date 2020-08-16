@@ -41,9 +41,10 @@ int square(int base, int pow, int count = 0, int res = 0, int multcount = 0, int
     if (pow == count)
         return res;
     if (res == 0)
-        res += multiply(base, base, multcount += 1, multres += base);
-    res += multiply(res, base, multcount += 1, multres += base);
-    cout << res << "\n";
+        res = base;
+    else
+        res += multiply(res, base, multcount += 1, multres);
+    // cout << res << "\n";
 
     return square(base, pow, count += 1, res);
 }
@@ -179,7 +180,7 @@ int main()
     // cout << multiply(5, 5) << "\n";
     // 2
     // std::cout << squareLoop(5,2) << std::endl;
-    // std::cout << square(5, 5) << std::endl;
+    std::cout << square(2, 10) << std::endl;
     // 3
     // int arr[] = {35, 243, 24465, 767, 354, 4646, 3245, 4647, 976};
     // std::cout << maxNumLoop(arr, sizeof(arr) / sizeof(arr[0])) << std::endl;

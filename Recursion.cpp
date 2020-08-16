@@ -1,3 +1,7 @@
+/*
+Sebastian Juncos A01022629
+TC1031
+*/
 #include <iostream>
 #include <string>
 using namespace std;

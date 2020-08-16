@@ -95,6 +95,32 @@ int vocals(string frase, int count = 0, int i = 0)
 
 // 5-------------------------------------------------------------------------
 
+int fiboLoop(int index)
+{
+    int A = 0, B = 1, next;
+    for (int i = 1; i < index; i++)
+    {
+        // cout << A << "\n";
+        next = A + B;
+        A = B;
+        B = next;
+    }
+    return A;
+}
+
+int fibonacci(int index, int next = 0, int a = 0, int b = 1, int terms = 1)
+{
+    if (terms == index)
+    {
+        return a;
+    }
+    // cout << a << " " << b << " " << next << "\n";
+    next = a + b;
+    a = b;
+    b = next;
+    return fibonacci(index, next, a, b, terms += 1);
+}
+
 // 6-------------------------------------------------------------------------
 
 int digitosLoop(int numOriginal)
@@ -177,26 +203,29 @@ int main()
 {
     // 1
     // cout << multiplyLoop(4, 5) << "\n";
-    // cout << multiply(5, 5) << "\n";
+    cout << multiply(5, 5) << "\n";
     // 2
     // std::cout << squareLoop(5,2) << std::endl;
     std::cout << square(2, 10) << std::endl;
     // 3
-    // int arr[] = {35, 243, 24465, 767, 354, 4646, 3245, 4647, 976};
+    int arr[] = {35, 243, 24465, 767, 354, 4646, 3245, 4647, 976};
     // std::cout << maxNumLoop(arr, sizeof(arr) / sizeof(arr[0])) << std::endl;
-    // std::cout << maxNum(arr, sizeof(arr) / sizeof(arr[0])) << std::endl;
+    std::cout << maxNum(arr, sizeof(arr) / sizeof(arr[0])) << std::endl;
     // 4
     // std::cout << vocalsLoop("Hola, me llamo sebastian") << std::endl;
-    //std::cout << vocals("Hola, me llamo Sebastian") << std::endl;
+    std::cout << vocals("Hola, me llamo Sebastian") << std::endl;
+    // 5
+    // std::cout << fiboLoop(9) << std::endl;
+    std::cout << fibonacci(9) << std::endl;
     // 6
     // std::cout << digitosLoop(65) << std::endl;
-    // std::cout << digitos(645) << std::endl;
+    std::cout << digitos(645) << std::endl;
     // 7
     // std::cout << reverseLoop("hola") << std::endl;
-    // std::cout << reverse("hola") << std::endl;
+    std::cout << reverse("hola") << std::endl;
     // 8
     // std::cout << palindromoLoop("massam") << std::endl;
-    // string palabraPalindormo = "maassaam";
-    // std::cout << palindromo(palabraPalindormo, palabraPalindormo.length() - 1) << std::endl;
+    string palabraPalindormo = "maassaam";
+    std::cout << palindromo(palabraPalindormo, palabraPalindormo.length() - 1) << std::endl;
     return 0;
 }

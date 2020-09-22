@@ -56,3 +56,14 @@ string Conexion::getHostnameDestino()
     return hostnameDestino;
 }
 
+void Conexion::displayInfo()
+{
+    std::cout << "Fecha: " << fecha << std::endl;
+    std::cout << "Hora: " << hora << std::endl;
+    std::cout << "Ip Fuente: " << ipFuente << std::endl;
+    std::cout << "Puerto Fuente: " << puertoFuente << std::endl;
+    std::cout << "Hostname Fuente: " << hostnameFuente << std::endl;
+    std::cout << "Ip Destino: " << ipDestino << std::endl;
+    std::cout << "Puerto Destino: " << puertoDestino << std::endl;
+    std::cout << "Hostname Destino: " << hostnameDestino << std::endl;
+}

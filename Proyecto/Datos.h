@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <sstream>
 #include "Conexion.h"
 #pragma once
 using namespace std;
@@ -10,8 +12,7 @@ private:
 
 public:
     Datos();
-    Datos(string, string, string, int, string, string, int, string);
-    void importarDatos();
+    void importarDatos(string);
     // Metodos de ordenamiento utilizando Selection Sort
     void ordenarPorFecha();
     void ordenarPorIpFuente();

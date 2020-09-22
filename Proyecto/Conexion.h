@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #pragma once
 using namespace std;
 
@@ -25,4 +26,5 @@ public:
     string getIpDestino();
     int getPuertoDestino();
     string getHostnameDestino();
+    void displayInfo();
 };

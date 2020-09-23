@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "Conexion.h"
 #pragma once
 using namespace std;
@@ -22,11 +23,13 @@ public:
     void ordenarPorPuertoDestino();
     void ordenarPorHostnameDestino();
     // Metodos de búsqueda utilizando Binary Search
-    void buscarPorFecha();
-    void buscarPorIpFuente();
-    void buscarPorPuertoFuente();
-    void buscarPorHostnameFuente();
-    void buscarPorIpDestino();
-    void buscarPorPuertoDestino();
-    void buscarPorHostnameDestino();
+    void buscarPorFecha(string);
+    void buscarPorIpFuente(string);
+    void buscarPorPuertoFuente(int);
+    void buscarPorHostnameFuente(string);
+    void buscarPorIpDestino(string);
+    void buscarPorPuertoDestino(int);
+    void buscarPorHostnameDestino(string);
+    // Metodo para imprimir los primeros N datos
+    void displayN(int);
 };

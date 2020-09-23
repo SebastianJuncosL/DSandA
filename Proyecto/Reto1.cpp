@@ -3,6 +3,9 @@
 int main()
 {
     Datos datos;
-    datos.importarDatos("equipo 4.csv"); // Ya que el archivo se encuentra en la misma carpeta que los scripts, no hayq eu especificar una direccion. Favor de no alterar los archivos en la carpeta
+    datos.displayN(3);
+    datos.ordenarPorFecha();
+    cout << " \n" << endl;
+    datos.displayN(3);
     return 0;
 }

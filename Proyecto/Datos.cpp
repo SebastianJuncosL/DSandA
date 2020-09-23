@@ -2,6 +2,7 @@
 
 Datos::Datos()
 {
+    noDeDatos = 0;
     importarDatos("equipo 4.csv"); // Ya que el archivo se encuentra en la misma carpeta que los scripts, no hayq eu especificar una direccion. Favor de no alterar la carpeta
 }
 
@@ -46,6 +47,7 @@ void Datos::importarDatos(string path)
             int pos6 = stoi(valores[6]);
             conexiones.push_back(Conexion(valores[0], valores[1], valores[2], pos3, valores[4], valores[5], pos6, valores[7]));
         }
+        noDeDatos++;
     }
 }
 
@@ -148,17 +150,14 @@ void Datos::ordenarPorHostnameDestino()
     }
 }
 
-// Metodos de búsqueda utilizando Binary Search
+// Metodos de búsqueda utilizando Linear Search
 void Datos::buscarPorFecha(string fechaBuscada)
 {
-    string current;
     int countTotal = 0;
     std::cout << "Logs con fechas que contienen '" << fechaBuscada << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        current = conexiones[i].getFecha();
-        size_t found = current.find(fechaBuscada);
-        if (found != string::npos)
+        if (fechaBuscada == conexiones[i].getFecha())
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -166,6 +165,7 @@ void Datos::buscarPorFecha(string fechaBuscada)
             countTotal++;
         }
     }
+    std::cout << "Total de datos con la fecha '" << fechaBuscada << "': " << countTotal << std::endl;
     if (countTotal == 0)
         std::cout << "No existen registros con esta fecha" << std::endl;
     else
@@ -174,14 +174,11 @@ void Datos::buscarPorFecha(string fechaBuscada)
 
 void Datos::buscarPorIpFuente(string ipFuenteBuscada)
 {
-    string current;
     int countTotal = 0;
-    std::cout << "Logs con ip fuentes que contienen '" << ipFuenteBuscada << "':" << endl;
+    std::cout << "Logs con el ip fuente '" << ipFuenteBuscada << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        current = conexiones[i].getIpFuente();
-        size_t found = current.find(ipFuenteBuscada);
-        if (found != string::npos)
+        if (ipFuenteBuscada == conexiones[i].getIpFuente())
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -189,6 +186,7 @@ void Datos::buscarPorIpFuente(string ipFuenteBuscada)
             countTotal++;
         }
     }
+    std::cout << "Total de datos con el ip fuente '" << ipFuenteBuscada << "': " << countTotal << std::endl;
     if (countTotal == 0)
         std::cout << "No existen registros con este ip fuente" << std::endl;
     else
@@ -209,6 +207,7 @@ void Datos::buscarPorPuertoFuente(int puertoFuenteBuscado)
             countTotal++;
         }
     }
+    std::cout << "Total de datos con el puerto fuente '" << puertoFuenteBuscado << "': " << countTotal << std::endl;
     if (countTotal == 0)
         std::cout << "No existen registros con este puerto fuente" << std::endl;
     else
@@ -217,14 +216,11 @@ void Datos::buscarPorPuertoFuente(int puertoFuenteBuscado)
 
 void Datos::buscarPorHostnameFuente(string hostnameFuenteBuscado)
 {
-    string current;
     int countTotal = 0;
-    std::cout << "Logs con hostname fuente que contienen '" << hostnameFuenteBuscado << "':" << endl;
+    std::cout << "Logs con hostname fuente '" << hostnameFuenteBuscado << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        current = conexiones[i].getHostnameFuente();
-        size_t found = current.find(hostnameFuenteBuscado);
-        if (found != string::npos)
+        if (hostnameFuenteBuscado == conexiones[i].getHostnameFuente())
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -232,6 +228,7 @@ void Datos::buscarPorHostnameFuente(string hostnameFuenteBuscado)
             countTotal++;
         }
     }
+    std::cout << "Total de datos con el hostname fuente '" << hostnameFuenteBuscado << "': " << countTotal << std::endl;
     if (countTotal == 0)
         std::cout << "No existen registros con este hostname fuente" << std::endl;
     else
@@ -239,14 +236,11 @@ void Datos::buscarPorHostnameFuente(string hostnameFuenteBuscado)
 }
 void Datos::buscarPorIpDestino(string ipDestionBuscado)
 {
-    string current;
     int countTotal = 0;
-    std::cout << "Logs con hostname fuente que contienen '" << ipDestionBuscado << "':" << endl;
+    std::cout << "Logs con el ip destino '" << ipDestionBuscado << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        current = conexiones[i].getIpDestino();
-        size_t found = current.find(ipDestionBuscado);
-        if (found != string::npos)
+        if (ipDestionBuscado == conexiones[i].getIpDestino())
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -254,14 +248,15 @@ void Datos::buscarPorIpDestino(string ipDestionBuscado)
             countTotal++;
         }
     }
+    std::cout << "Total de datos con el ip destino '" << ipDestionBuscado << "': " << countTotal << std::endl;
     if (countTotal == 0)
-        std::cout << "No existen registros con este hostname fuente" << std::endl;
+        std::cout << "No existen registros con este ip destino" << std::endl;
     else
         cout << "\n";
 }
 void Datos::buscarPorPuertoDestino(int puertoDestinoBuscado)
 {
-    int current, countTotal = 0;
+    int countTotal = 0;
     std::cout << "Logs con puerto destino '" << puertoDestinoBuscado << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
@@ -273,6 +268,7 @@ void Datos::buscarPorPuertoDestino(int puertoDestinoBuscado)
             countTotal++;
         }
     }
+    std::cout << "Total de datos con el puerto destino '" << puertoDestinoBuscado << "': " << countTotal << std::endl;
     if (countTotal == 0)
         std::cout << "No existen registros con este puerto destino" << std::endl;
     else
@@ -280,8 +276,8 @@ void Datos::buscarPorPuertoDestino(int puertoDestinoBuscado)
 }
 void Datos::buscarPorHostnameDestino(string hostnameDestinoBuscado)
 {
-    int current, countTotal = 0;
-    std::cout << "Logs con hostname destino '" << hostnameDestinoBuscado << "':" << endl;
+    int countTotal = 0;
+    std::cout << "Logs con el hostname destino '" << hostnameDestinoBuscado << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
         if (hostnameDestinoBuscado == conexiones[i].getHostnameDestino())
@@ -292,6 +288,7 @@ void Datos::buscarPorHostnameDestino(string hostnameDestinoBuscado)
             countTotal++;
         }
     }
+    std::cout << "Total de datos con el hostname destino '" << hostnameDestinoBuscado << "': " << countTotal << std::endl;
     if (countTotal == 0)
         std::cout << "No existen registros con este hostname destino" << std::endl;
     else

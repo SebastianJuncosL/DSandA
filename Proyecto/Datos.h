@@ -10,6 +10,7 @@ class Datos
 {
 private:
     vector<Conexion> conexiones;
+    int noDeDatos;
 
 public:
     Datos();
@@ -32,4 +33,6 @@ public:
     void buscarPorHostnameDestino(string);
     // Metodo para imprimir los primeros N datos
     void displayN(int);
+    // Metodo para conseguir el número de Datos
+    int getNoDeDatos() { return noDeDatos; }
 };

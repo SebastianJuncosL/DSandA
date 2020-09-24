@@ -34,5 +34,13 @@ public:
     // Metodo para imprimir los primeros N datos
     void displayN(int);
     // Metodo para conseguir el número de Datos
-    int getNoDeDatos() { return noDeDatos; }
+    int getNoDeDatos() { return noDeDatos; };
+    // Metodos para listar 
+    void listarFechas();
+    void listarIpFuente();
+    void listarPuertosFuente();
+    void listarHostnameFuente();
+    void listarIpDestino();
+    void listarPuertosDestino();
+    void listarHostnameDestino();
 };

@@ -11,22 +11,24 @@ void Datos::importarDatos(string path)
     ifstream fileIn;
     fileIn.open(path);
     string line, partes;
-    string valores[8];
+    string valores[9];
     int i = 0;
     while (fileIn.good())
     {
         getline(fileIn, line);
+
         istringstream flujoEntrada(line);
         while (getline(flujoEntrada, partes, ','))
         {
+
             valores[i] = partes;
-            //std::cout << i << std::endl;
-            // cout<<i<<"\n";
-            //std::cout << valores[i] << std::endl;
             i++;
-            if (i == 8)
-                i = 0;
         }
+        if (valores[7].find('\r') != valores[7].npos)
+        {
+            valores[7] = valores[7].substr(0, valores[7].size() - 1);
+        }
+
         if (valores[3] == "-" && valores[6] == "-")
             conexiones.push_back(Conexion(valores[0], valores[1], valores[2], 0, valores[4], valores[5], 0, valores[7]));
         else if (valores[3] == "-")
@@ -47,6 +49,7 @@ void Datos::importarDatos(string path)
             int pos6 = stoi(valores[6]);
             conexiones.push_back(Conexion(valores[0], valores[1], valores[2], pos3, valores[4], valores[5], pos6, valores[7]));
         }
+        i = 0;
         noDeDatos++;
     }
 }
@@ -153,11 +156,14 @@ void Datos::ordenarPorHostnameDestino()
 // Metodos de búsqueda utilizando Linear Search
 void Datos::buscarPorFecha(string fechaBuscada)
 {
+    string current;
     int countTotal = 0;
     std::cout << "Logs con fechas que contienen '" << fechaBuscada << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        if (fechaBuscada == conexiones[i].getFecha())
+        current = conexiones[i].getFecha();
+        size_t found = current.find(fechaBuscada);
+        if (found != string::npos)
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -174,11 +180,14 @@ void Datos::buscarPorFecha(string fechaBuscada)
 
 void Datos::buscarPorIpFuente(string ipFuenteBuscada)
 {
+    string current;
     int countTotal = 0;
-    std::cout << "Logs con el ip fuente '" << ipFuenteBuscada << "':" << endl;
+    std::cout << "Logs con ip fuente que contienen '" << ipFuenteBuscada << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        if (ipFuenteBuscada == conexiones[i].getIpFuente())
+        current = conexiones[i].getIpFuente();
+        size_t found = current.find(ipFuenteBuscada);
+        if (found != string::npos)
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -216,11 +225,14 @@ void Datos::buscarPorPuertoFuente(int puertoFuenteBuscado)
 
 void Datos::buscarPorHostnameFuente(string hostnameFuenteBuscado)
 {
+    string current;
     int countTotal = 0;
-    std::cout << "Logs con hostname fuente '" << hostnameFuenteBuscado << "':" << endl;
+    std::cout << "Logs con hostname fuente que contienen '" << hostnameFuenteBuscado << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        if (hostnameFuenteBuscado == conexiones[i].getHostnameFuente())
+        current = conexiones[i].getHostnameFuente();
+        size_t found = current.find(hostnameFuenteBuscado);
+        if (found != string::npos)
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -236,11 +248,14 @@ void Datos::buscarPorHostnameFuente(string hostnameFuenteBuscado)
 }
 void Datos::buscarPorIpDestino(string ipDestionBuscado)
 {
+    string current;
     int countTotal = 0;
-    std::cout << "Logs con el ip destino '" << ipDestionBuscado << "':" << endl;
+    std::cout << "Logs con hostname fuente que contienen '" << ipDestionBuscado << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        if (ipDestionBuscado == conexiones[i].getIpDestino())
+        current = conexiones[i].getIpDestino();
+        size_t found = current.find(ipDestionBuscado);
+        if (found != string::npos)
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -250,7 +265,7 @@ void Datos::buscarPorIpDestino(string ipDestionBuscado)
     }
     std::cout << "Total de datos con el ip destino '" << ipDestionBuscado << "': " << countTotal << std::endl;
     if (countTotal == 0)
-        std::cout << "No existen registros con este ip destino" << std::endl;
+        std::cout << "No existen registros con este hostname fuente" << std::endl;
     else
         cout << "\n";
 }
@@ -276,11 +291,14 @@ void Datos::buscarPorPuertoDestino(int puertoDestinoBuscado)
 }
 void Datos::buscarPorHostnameDestino(string hostnameDestinoBuscado)
 {
+    string current;
     int countTotal = 0;
-    std::cout << "Logs con el hostname destino '" << hostnameDestinoBuscado << "':" << endl;
+    std::cout << "Logs con el hostname destino que contiene '" << hostnameDestinoBuscado << "':" << endl;
     for (int i = 0; i < conexiones.size(); i++)
     {
-        if (hostnameDestinoBuscado == conexiones[i].getHostnameDestino())
+        current = conexiones[i].getHostnameDestino();
+        size_t found = current.find(hostnameDestinoBuscado);
+        if (found != string::npos)
         {
             std::cout << "---------------------------------------------" << std::endl;
             conexiones[i].displayInfo();
@@ -299,7 +317,6 @@ void Datos::buscarPorHostnameDestino(string hostnameDestinoBuscado)
 void Datos::displayN(int cuantos)
 {
     if (cuantos > conexiones.size())
-
         cuantos = conexiones.size();
     else if (cuantos < 0)
     {
@@ -315,4 +332,172 @@ void Datos::displayN(int cuantos)
             std::cout << "---------------------------------------------" << std::endl;
         }
     }
+}
+
+// Metodos para listar
+void Datos::listarFechas()
+{
+    int fechasCont = 0;
+    vector<string> fechas;
+    for (int i = 0; i < conexiones.size(); i++)
+    {
+        auto it = find(fechas.begin(), fechas.end(), conexiones[i].getFecha());
+        if (it == fechas.end())
+        {
+            fechas.push_back(conexiones[i].getFecha());
+            fechasCont++;
+        }
+    }
+    std::cout << "Las fechas listadas son las siguientes:" << std::endl;
+    for (int i = 0; i < fechas.size(); i++)
+    {
+        if (i < fechas.size() - 1)
+            std::cout << fechas[i] << ", ";
+        else
+            std::cout << fechas[i] << std::endl;
+    }
+    std::cout << "Hay " << fechasCont << " fechas" << std::endl;
+}
+
+void Datos::listarIpFuente()
+{
+    int ipCont = 0;
+    vector<string> ipFuentes;
+    for (int i = 0; i < conexiones.size(); i++)
+    {
+        auto it = find(ipFuentes.begin(), ipFuentes.end(), conexiones[i].getIpFuente());
+        if (it == ipFuentes.end())
+        {
+            ipFuentes.push_back(conexiones[i].getIpFuente());
+            ipCont++;
+        }
+    }
+    std::cout << "Los ips fuente listados son los siguientes:" << std::endl;
+    for (int i = 0; i < ipFuentes.size(); i++)
+    {
+        if (i < ipFuentes.size() - 1)
+            std::cout << ipFuentes[i] << ", ";
+        else
+            std::cout << ipFuentes[i] << std::endl;
+    }
+    std::cout << "Hay " << ipCont << " ips" << std::endl;
+}
+
+void Datos::listarPuertosFuente()
+{
+    int puertosCont = 0;
+    vector<int> puertosFuente;
+    for (int i = 0; i < conexiones.size(); i++)
+    {
+        auto it = find(puertosFuente.begin(), puertosFuente.end(), conexiones[i].getPuertoFuente());
+        if (it == puertosFuente.end())
+        {
+            puertosFuente.push_back(conexiones[i].getPuertoFuente());
+            puertosCont++;
+        }
+    }
+    std::cout << "Los puertos fuente listados son los siguientes:" << std::endl;
+    for (int i = 0; i < puertosFuente.size(); i++)
+    {
+        if (i < puertosFuente.size() - 1)
+            std::cout << puertosFuente[i] << ", ";
+        else
+            std::cout << puertosFuente[i] << std::endl;
+    }
+    std::cout << "Hay " << puertosCont << " puertos fuente" << std::endl;
+}
+
+void Datos::listarHostnameFuente()
+{
+    int hostCont = 0;
+    vector<string> hostNames;
+    for (int i = 0; i < conexiones.size(); i++)
+    {
+        auto it = find(hostNames.begin(), hostNames.end(), conexiones[i].getHostnameFuente());
+        if (it == hostNames.end())
+        {
+            hostNames.push_back(conexiones[i].getHostnameFuente());
+            hostCont++;
+        }
+    }
+    std::cout << "Los hostname fuente listados son los siguientes:" << std::endl;
+    for (int i = 0; i < hostNames.size(); i++)
+    {
+        if (i < hostNames.size() - 1)
+            std::cout << hostNames[i] << ", ";
+        else
+            std::cout << hostNames[i] << std::endl;
+    }
+    std::cout << "Hay " << hostCont << " hostnames fuente" << std::endl;
+}
+void Datos::listarIpDestino()
+{
+    int ipCont = 0;
+    vector<string> ipsDestino;
+    for (int i = 0; i < conexiones.size(); i++)
+    {
+        auto it = find(ipsDestino.begin(), ipsDestino.end(), conexiones[i].getIpDestino());
+        if (it == ipsDestino.end())
+        {
+            ipsDestino.push_back(conexiones[i].getIpDestino());
+            ipCont++;
+        }
+    }
+    std::cout << "Los ips destino listados son los siguientes:" << std::endl;
+    for (int i = 0; i < ipsDestino.size(); i++)
+    {
+        if (i < ipsDestino.size() - 1)
+            std::cout << ipsDestino[i] << ", ";
+        else
+            std::cout << ipsDestino[i] << std::endl;
+    }
+    std::cout << "Hay " << ipCont << " ips destino" << std::endl;
+}
+
+void Datos::listarPuertosDestino()
+{
+    int puertosCont = 0;
+    vector<int> puertosDestino;
+    for (int i = 0; i < conexiones.size(); i++)
+    {
+        auto it = find(puertosDestino.begin(), puertosDestino.end(), conexiones[i].getPuertoDestino());
+        if (it == puertosDestino.end())
+        {
+            puertosDestino.push_back(conexiones[i].getPuertoDestino());
+            puertosCont++;
+        }
+    }
+    std::cout << "Los puertos destino listados son los siguientes:" << std::endl;
+    for (int i = 0; i < puertosDestino.size(); i++)
+    {
+        if (i < puertosDestino.size() - 1)
+            std::cout << puertosDestino[i] << ", ";
+        else
+            std::cout << puertosDestino[i] << std::endl;
+    }
+    std::cout << "Hay " << puertosCont << " puertos destino" << std::endl;
+}
+
+void Datos::listarHostnameDestino()
+{
+    int hostCont = 0;
+    vector<string> hostNames;
+    for (int i = 0; i < conexiones.size(); i++)
+    {
+        auto it = find(hostNames.begin(), hostNames.end(), conexiones[i].getHostnameDestino());
+        if (it == hostNames.end())
+        {
+            hostNames.push_back(conexiones[i].getHostnameDestino());
+            hostCont++;
+        }
+    }
+    std::cout << "Los hostname destino listados son los siguientes:" << std::endl;
+    for (int i = 0; i < hostNames.size(); i++)
+    {
+        if (i < hostNames.size() - 1)
+            std::cout << hostNames[i] << ", ";
+        else
+            std::cout << hostNames[i] << std::endl;
+    }
+    std::cout << "Hay " << hostCont << " hostnames destino" << std::endl;
 }

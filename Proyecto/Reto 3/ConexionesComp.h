@@ -22,4 +22,8 @@ public:
     void mostrarIpsSalientes();
     void mostrarIpsEntrantes();
     // funciones para buscar dentro de los vectores
+    bool buscarHostSaliente(string);
+    bool buscarHostEntrante(string);
+    bool buscarIpSaliente(string);
+    bool buscarPiEntrante(string);
 };

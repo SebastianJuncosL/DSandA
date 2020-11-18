@@ -5,20 +5,21 @@
 #include <vector>
 using namespace std;
 
-class Prueba
+// Nota: El archivo de conexionesNoReto.cpp se corre y compila por separado, este sirve para las preguntas 1 y 2
+class ConexionesNoReto
 {
 private:
     string conexiones[100000];
-
-public:
-    Prueba();
-    void cargarDatos();
-    void mostrarDominios();
     bool find(string, string);
     void hashing(string);
+
+public:
+    ConexionesNoReto();
+    void cargarDatos();
+    void mostrarDominios();
 };
 
-Prueba::Prueba()
+ConexionesNoReto::ConexionesNoReto()
 {
     for (int i = 0; i < 100000; i++)
     {
@@ -26,7 +27,7 @@ Prueba::Prueba()
     }
 }
 
-void Prueba::cargarDatos()
+void ConexionesNoReto::cargarDatos()
 {
     ifstream fileIn;
     fileIn.open("equipo 4.csv");
@@ -59,7 +60,7 @@ void Prueba::cargarDatos()
     std::cout << totalDeValores << std::endl;
 }
 
-void Prueba::mostrarDominios()
+void ConexionesNoReto::mostrarDominios()
 {
     for (int i = 0; i < 100000; i++)
     {
@@ -69,7 +70,7 @@ void Prueba::mostrarDominios()
     std::cout << "" << std::endl;
 }
 
-bool Prueba::find(string searchHere, string searching)
+bool ConexionesNoReto::find(string searchHere, string searching)
 {
     int j = 1, finalLen = 8;
     bool found;
@@ -84,7 +85,7 @@ bool Prueba::find(string searchHere, string searching)
     return false;
 }
 
-void Prueba::hashing(string toInsert)
+void ConexionesNoReto::hashing(string toInsert)
 {
     int pos = toInsert[0] + toInsert[1] + toInsert[2];
     if (conexiones[pos] == "/////")
@@ -107,11 +108,10 @@ void Prueba::hashing(string toInsert)
     }
 }
 
-int main()
+int main(int argc, char const *argv[])
 {
-    Prueba a;
+    ConexionesNoReto a;
     a.cargarDatos();
     a.mostrarDominios();
-    // a.mostrarFuente();
     return 0;
 }

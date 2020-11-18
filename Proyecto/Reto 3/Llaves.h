@@ -11,17 +11,26 @@ class Llaves
 private:
     //Conexiones conexion;
     string key;
-    string hostname;
-    string ip;
     ConexionesComp conexiones;
 
 public:
     Llaves();
-    Llaves(string, string, string);
+    Llaves(string);
+    // Generador de llave
     string generateKey(string);
+    // Inserta en los objetos de tipo Conexiones Computadora
     void insertarEntrante(string, string);
     void insertarSaliente(string, string);
+    // Usar la lalve de manera externa
     string getKey();
-    string getHostname();
-    string getIP();
+    // Mostrar especifico
+    void mostrarHostsSalientes() { conexiones.mostrarHostsSalientes(); };
+    void mostrarHostsEntrantes() { conexiones.mostrarHostsEntrantes(); };
+    void mostrarIpsSalientes() { conexiones.mostrarIpsSalientes(); };
+    void mostrarIpsEntrantes() { conexiones.mostrarIpsEntrantes(); };
+    // Buscar Especifico
+    bool buscarHostSaliente(string host) { conexiones.buscarHostSaliente(host); };
+    bool buscarHostEntrante(string host) { conexiones.buscarHostEntrante(host); };
+    bool buscarIpSaliente(string ip) { conexiones.buscarIpSaliente(ip); };
+    bool buscarPiEntrante(string ip) { conexiones.buscarPiEntrante(ip); };
 };

@@ -192,16 +192,31 @@ public:
 
     void nuevaEntrante(int port, string ip, string name)
     {
-        infoConexion a(port, ip, name); 
-        entrantes.push_front(a);   
+        infoConexion a(port, ip, name);
+        entrantes.push_front(a);
     }
 
     void nuevaSaliente(int port, string ip, string name)
     {
         infoConexion a(port, ip, name);
-        salientes.push_back(a);        
+        salientes.push_back(a);
     }
 };
+
+bool find(string searchHere, string searching)
+{
+    int j = 1, finalLen = 8;
+    bool found;
+    for (int i = 1; i < searchHere.size(); i++)
+    {
+
+        if (searchHere[i] == searching[j] && searchHere[i - 1] == searching[j - 1])
+            j++;
+    }
+    if (j == finalLen)
+        return true;
+    return false;
+}
 
 int main(int argc, const char **argv)
 {
@@ -218,38 +233,66 @@ int main(int argc, const char **argv)
             }
             cc[r.getIpFuente()].nuevaSaliente(r.getPuertoDestino(), r.getIpDestino(), r.getHostnameDestino());
         }
+        if (r.getHostnameDestino() != "-")
+        {
+            if (cc.find(r.getHostnameDestino()) == cc.end())
+            {
+                ConexionesComputadora a(r.getIpDestino(), r.getHostnameDestino());
+                cc[r.getHostnameDestino()] = a;
+            }
+            cc[r.getHostnameDestino()].nuevaEntrante(r.getPuertoDestino(), r.getIpDestino(), r.getHostnameFuente());
+        }
     }
 
     // Pregunta 3
 
-    int cont = 0;
-    for (auto it = cc.begin(); it != cc.end(); it++)
-    {
-        if (cc[it->first].entrantes.size() > 0)
-        {
-            cont++;
-            cout << it->first << ":";
-            cout << cc[it->first].name << ",";
-        }
-        cout << endl;
-    }
-    if (cont == 0)
-        std::cout << "No hay conexeiones entrantes en los hosts de reto.com" << std::endl;
+    // int cont = 0;
+    // for (auto it = cc.begin(); it != cc.end(); it++)
+    // {
+    //     if (cc[it->first].entrantes.size() > 0 && find(cc[it->first].name, "reto.com"))
+    //         cont++;
+    // }
+    // if (cont == 0)
+    //     std::cout << "No hay conexeiones entrantes en los hosts de reto.com" << std::endl;
+    // else
+    //     std::cout << "Entrantes: " << cont << std::endl;
 
-    // PRegunta 4
-    int i = 0;
-    for (auto it = cc.begin(); it != cc.end(); it++)
-    {
-        if (cc[it->first].entrantes.size() > 0)
-        {
-            list<infoConexion> entrantes = cc[it->first].entrantes;
-            for (auto v: entrantes)
-            {
-                v.printAll();
-                std::cout << v.remoteIP << std::endl;
-            }
-        }
-        cout << endl;
-    }
+    // Pregunta 4
+    // vector<string> hostsInfectados;
+    // for (auto it = cc.begin(); it != cc.end(); it++)
+    // {
+    //     if (cc[it->first].salientes.size() != 0)
+    //     {
+    //         list<infoConexion> consalientes = cc[it->first].salientes;
+    //         for (auto v : consalientes)
+    //         {
+    //             if (find(v.remoteName, "reto.com") == true)
+    //             {
+    //                 std::cout << cc[it->first].name << ": " << cc[it->first].ip << std::endl;
+    //                 hostsInfectados.push_back(cc[it->first].name);
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // Pregunta 6
+    // if (hostsInfectados.size() > 0)
+    // {
+    //     for (auto it = cc.begin(); it != cc.end(); it++)
+    //     {
+    //         se crea una lista con los valores de la lista salientes para poder acceder a ella
+    //         list<infoConexion> consalientes = cc[it->first].salientes;
+    //         for (auto v : consalientes)
+    //         {
+    //             if (v.remoteName == "go8hmesu6r6ydjrvys1g.org" || v.remoteName == "xi1t1ohvxs4th4c6ylg2.net")
+    //             {
+    //                 std::cout << cc[it->first].name << ": " << cc[it->first].ip << std::endl;
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
+
     return 0;
 }

@@ -4,7 +4,7 @@
 #include <sstream>
 #include <vector>
 #include "Llaves.h"
-#include "ConexionesNoReto.h"
+#include "conexionesNoReto.cpp"
 using namespace std;
 
 // class Prueba
@@ -194,7 +194,7 @@ vector<Llaves> cargarDatos()
                 //std::cout << "no lo encontramos, entonces lo agregamos" << std::endl;
                 diccionario.push_back(Llaves(valores[7]));
                 diccionario[diccionario.size() - 1].insertarEntrante(valores[2], valores[4]);
-                found = 1;
+                found = 1;//
             }
         }
         i = 0;

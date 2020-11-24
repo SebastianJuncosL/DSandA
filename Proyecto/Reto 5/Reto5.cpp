@@ -4,6 +4,55 @@
 using namespace std;
 
 template <class T>
+class SNode
+{
+public:
+    T value;
+    SNode next *;
+    SNode();
+    SNode(T value)
+    {
+        this->value = value;
+        next = 0;
+    }
+};
+
+template <class T>
+class Stack
+{
+private:
+    SNode<T> *head;
+
+public:
+    Stack() { head = 0; }
+    void push(T value)
+    {
+        SNode<T> *t = new SNode(value);
+        t->next = head;
+        head = t;
+    }
+
+    T pop()
+    {
+        SNode<T> *t = head;
+        if (head->next)
+            head = head->next;
+        else
+            head = 0;
+        T val = t->value;
+        delete t;
+        return val;
+    }
+
+    bool isEmpty()
+    {
+        if (head)
+            return false;
+        return true;
+    }
+};
+
+template <class T>
 class Nodo
 {
 public:
@@ -19,7 +68,7 @@ public:
 
     void agregarArcoDirigidoConPeso(Nodo<T> *sig, int peso)
     {
-        if (siguientes.find(sig) == siguientes.end())
+        if (siguientes.find(sig) 2 == siguientes.end())
             siguientes[sig] = peso;
     }
 
@@ -110,6 +159,22 @@ public:
 
     bool DFS(T v1, T v2)
     {
+        Stack<T> s;
+        s.push(v1);
+        while (s.isEmpty() == false)
+        {
+            T temp = s.pop();
+            nodos[temp]->visited = true;
+            if (temp == v2)
+                return true;
+            else
+            {
+                for (auto t : nodos[temp]->siguientes)
+                    if (t->visited == false)
+                        s.push(t);
+            }
+        }
+        return false;
     }
 };
 

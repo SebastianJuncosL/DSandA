@@ -471,9 +471,9 @@ int main()
     //CREA VECTOR CON TODAS LAS FECHAS DEL ARCHIVO
     vector<string> dates;
     dates.push_back(conexiones[0].date);
-    for(Record r : conexiones)
+    for (Record r : conexiones)
     {
-        if(dates[dates.size()-1] != r.date)
+        if (dates[dates.size() - 1] != r.date)
         {
             dates.push_back(r.date);
         }

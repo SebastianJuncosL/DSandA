@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <time.h>
+#include <unistd.h>
 
 using namespace std;
 template <class T>
@@ -54,6 +56,18 @@ public:
         }
     }
 
+    bool find(T x)
+    {
+        Node<T> *dummy = head;
+        while (dummy)
+        {
+            if (dummy->data == x)
+                return true;
+            dummy = dummy->next;
+        }
+        return false;
+    }
+
     void deleteList()
     {
         Node<T> *t = head, *tail;
@@ -75,7 +89,26 @@ public:
     void agregar(int x)
     {
         int pos = x % 10;
+        if (find(x))
+            return;
         hashM[pos].append(x);
+    }
+
+    void printHM()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            std::cout << i + 1 << ": ";
+            hashM[i].printList();
+            cout << "\n";
+        }
+        cout << "\n";
+    }
+
+    bool find(int x)
+    {
+        int pos = x % 10;
+        return hashM[pos].find(x);
     }
 
     void borrarLenP(int x)
@@ -89,25 +122,19 @@ public:
         for (int i = 0; i < 10; i++)
             hashM[i].deleteList();
     }
-
-    void printHM()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            std::cout << i + 1 << ": ";
-            hashM[i].printList();
-            cout << "\n";
-        }
-        cout << "\n";
-    }
 };
 
 int main(int argc, char const *argv[])
 {
     hashMap a;
-    for (int i = 0; i < 100000; i++)
+    for (int i = 0; i < 1000; i++)
     {
-        a.agregar(i);
+        srand(time(0));
+        int val = rand() % 1000;
+        a.agregar(val);
+
+        unsigned int microsecond = 10000;
+        usleep(microsecond); //sleeps for 3 second
     }
     a.printHM();
     a.borrarT();

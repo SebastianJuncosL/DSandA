@@ -87,9 +87,7 @@ public:
     void borrarT()
     {
         for (int i = 0; i < 10; i++)
-        {
             hashM[i].deleteList();
-        }
     }
 
     void printHM()

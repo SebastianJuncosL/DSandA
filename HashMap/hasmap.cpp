@@ -45,7 +45,10 @@ public:
         {
             while (dummy)
             {
-                std::cout << dummy->data << ", ";
+                if (dummy->next)
+                    std::cout << dummy->data << ", ";
+                else
+                    std::cout << dummy->data;
                 dummy = dummy->next;
             }
         }
@@ -55,8 +58,6 @@ public:
     {
         Node<T> *t = head, *tail;
         head = 0;
-        if (head == 0)
-            return;
         while (t)
         {
             tail = t;
@@ -106,15 +107,10 @@ public:
 int main(int argc, char const *argv[])
 {
     hashMap a;
-    std::cout << "a" << std::endl;
-    a.agregar(1);
-    a.agregar(85);
-    a.agregar(34);
-    a.agregar(100);
-    a.agregar(99);
-    a.agregar(0);
-    a.printHM();
-    a.borrarLenP(0);
+    for (int i = 0; i < 100000; i++)
+    {
+        a.agregar(i);
+    }
     a.printHM();
     a.borrarT();
     a.printHM();

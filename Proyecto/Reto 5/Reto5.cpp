@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
 #include <list>
 #include <string>
 #include <fstream> //libreta para usar ifstream
@@ -66,8 +67,6 @@ public:
         nameDestiny = nD;
     }
 
-    //Record(){}
-
     void imprimirRecord()
     {
         cout << date << "   " << time << "   " << sourceIP << "   " << sourcePort << "   " << nameSource << "   " << desIP << "   " << desPort << "   " << nameDestiny << endl;
@@ -118,6 +117,7 @@ public:
     }
 };
 
+//CLASE STACK
 template <class T>
 class Stack
 {
@@ -170,6 +170,7 @@ public:
     }
 };
 
+//CLASE QUEUE
 template <class T>
 class Queue
 {
@@ -239,6 +240,7 @@ bool checkReto(string searchHere, string searching)
     return false;
 }
 
+//CLASE NODO
 template <class T>
 class Nodo
 {
@@ -247,7 +249,6 @@ public:
     bool visited;
     int x = 0;
     unordered_map<Nodo<T> *, int> siguientes; //Nodo IP fer: 1
-
     Nodo(T val)
     {
         value = val;
@@ -279,6 +280,7 @@ public:
     }
 };
 
+//CLASE GRAFO
 template <class T>
 class Graph
 {
@@ -420,11 +422,18 @@ public:
     int conexionesPorDia(string date, string name)
     {
         int count = 0;
+        vector<string> dominios;
+
         for (Record r : conexiones)
         {
             if (r.date == date && name == r.nameDestiny)
             {
-                count++;
+                vector<string>::iterator it = find(dominios.begin(), dominios.end(), r.nameSource);
+                if (it == dominios.end())
+                {
+                    count++;
+                    dominios.push_back(r.nameSource);
+                }
             }
         }
         return count;
@@ -478,6 +487,7 @@ int main()
             dates.push_back(r.date);
         }
     }
+
     //IMPRIME NUEMERO DE VECES QUE SE CONECTO EN TAL FECHA
     for (int i = 0; i < dates.size(); i++)
     {

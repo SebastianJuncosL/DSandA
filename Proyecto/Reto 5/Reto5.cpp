@@ -28,9 +28,7 @@ public:
         sourceIP = sourceIP_;
 
         if (sourcePort_ == "-")
-        {
             sourcePort = 0;
-        }
         else
         {
             try
@@ -48,9 +46,7 @@ public:
         desIP = desIP_;
 
         if (desPort_ == "-")
-        {
             desPort = 0;
-        }
         else
         {
             try
@@ -89,14 +85,10 @@ void leerDatos(string path) //path = doc de datos
 
         //TRUE = no se ha acabado, FALSE = se acabo
         while (getline(sIn, partes, ',')) //lee las partes de la linea separada por una coma
-        {
             valores.push_back(partes);
-        }
         //se quita '\r' para poder comparar
         if (valores[7].find('\r') != valores[7].npos)
-        { //quita '\r'
             valores[7] = valores[7].substr(0, valores[7].size() - 1);
-        }
         Record r(valores[0], valores[1], valores[2], valores[3], valores[4], valores[5], valores[6], valores[7]);
         conexiones.push_back(r);
         valores.clear();
@@ -273,9 +265,7 @@ public:
     {
         cout << value << ":";
         for (auto nodoSiguiente : siguientes)
-        {
             cout << nodoSiguiente.first->value << "," << nodoSiguiente.second << ";";
-        }
         cout << endl;
     }
 };
@@ -295,9 +285,7 @@ public:
             for (auto it = x.second->siguientes.begin(); it != x.second->siguientes.end(); it++)
             {
                 if (it->first->value == searching)
-                {
                     count++;
-                }
             }
         }
         return count;
@@ -316,13 +304,9 @@ public:
     void agregarArcoDirigidoConPeso(T nodo1, T nodo2, int peso)
     {
         if (nodos.find(nodo1) != nodos.end() && nodos.find(nodo2) != nodos.end())
-        {
             nodos[nodo1]->agregarArcoDirigidoConPeso(nodos[nodo2], peso);
-        }
         else
-        {
             cout << "Alguno de los 2 nodos no se encuentra en el grafo" << endl;
-        }
     }
 
     //agrega un arco dirigido de nodo1 a nodo2 con peso de 1
@@ -365,17 +349,13 @@ public:
             //cout << temp << endl;
             nodos[temp]->visited = true; //es visitado
             if (temp == v2)
-            {
                 return true; //termina while
-            }
             else
             {
                 for (auto t : nodos[temp]->siguientes)
                 {
-                    if (t.first->visited == false) //si no ha sido visitado
-                    {
+                    if (t.first->visited == false)          //si no ha sido visitado
                         adyacentes.enqueue(t.first->value); //agrega al queue
-                    }
                 }
             }
         }
@@ -394,17 +374,13 @@ public:
             //cout << temp << endl;
             nodos[temp]->visited = true; //es visitado
             if (temp == nodo2)
-            {
                 return true; //se encuentra y regresa true
-            }
             else
             {
                 for (auto t : nodos[temp]->siguientes)
                 {
-                    if (t.first->visited == false) //si no han sido visitados
-                    {
+                    if (t.first->visited == false)       //si no han sido visitados
                         adyacentes.push(t.first->value); //se agrega el stack
-                    }
                 }
             }
         }
@@ -414,9 +390,7 @@ public:
     void quitarVisita()
     {
         for (auto t : nodos)
-        {
             t.second->visited = false;
-        }
     }
 
     int conexionesPorDia(string date, string name)
@@ -483,9 +457,7 @@ int main()
     for (Record r : conexiones)
     {
         if (dates[dates.size() - 1] != r.date)
-        {
             dates.push_back(r.date);
-        }
     }
 
     //IMPRIME NUEMERO DE VECES QUE SE CONECTO EN TAL FECHA

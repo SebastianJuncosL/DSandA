@@ -25,15 +25,11 @@ void importarDatos(string path)
         istringstream flujoEntrada(line);
         while (getline(flujoEntrada, partes, ','))
         {
-
             valores[i] = partes;
             i++;
         }
         if (valores[7].find('\r') != valores[7].npos)
-        {
             valores[7] = valores[7].substr(0, valores[7].size() - 1);
-        }
-
         if (valores[3] == "-" && valores[6] == "-")
             conexiones.push_back(Conexion(valores[0], valores[1], valores[2], 0, valores[4], valores[5], 0, valores[7]));
         else if (valores[3] == "-")
@@ -41,15 +37,12 @@ void importarDatos(string path)
             int pos6 = stoi(valores[6]);
             std::cout << pos6 << std::endl;
             conexiones.push_back(Conexion(valores[0], valores[1], valores[2], 0, valores[4], valores[5], pos6, valores[7]));
-            ;
         }
         else if (valores[6] == "-")
         {
             int pos3 = stoi(valores[3]);
             conexiones.push_back(Conexion(valores[0], valores[1], valores[2], pos3, valores[4], valores[5], 0, valores[7]));
-            ;
         }
-
         else
         {
             int pos3 = stoi(valores[3]);
@@ -67,7 +60,6 @@ bool find(string searchHere, string searching)
     bool found;
     for (int i = 1; i < searchHere.size(); i++)
     {
-
         if (searchHere[i] == searching[j] && searchHere[i - 1] == searching[j - 1])
             j++;
     }
@@ -79,11 +71,11 @@ unordered_map<string, ConexionesPag> cc;
 unordered_map<string, int> cE;
 unordered_map<string, int> conexionesPorDia(string date)
 {
-    for(Conexion a : conexiones)
+    for (Conexion a : conexiones)
     {
-        if(a.fecha == date && a.hostnameDestino != "-" && find(a.hostnameDestino, "reto.com") == false)
+        if (a.fecha == date && a.hostnameDestino != "-" && find(a.hostnameDestino, "reto.com") == false)
         {
-            if(cc.find(a.hostnameDestino) == cc.end())
+            if (cc.find(a.hostnameDestino) == cc.end())
             {
                 ConexionesPag b(a.hostnameDestino);
                 cc[a.hostnameDestino] = b;
@@ -91,45 +83,41 @@ unordered_map<string, int> conexionesPorDia(string date)
             cc[a.hostnameDestino].agregarE(a.hostnameFuente);
         }
     }
-    for(auto it = cc.begin(); it != cc.end(); it++)
-    {
+    for (auto it = cc.begin(); it != cc.end(); it++)
         cE[it->first] = cc[it->first].conexE;
-    }
     return cE;
-}  
+}
 
 bool top(int n, string fecha)
 {
     conexionesPorDia(fecha);
     BST pag;
     map<int, vector<string>> dominios;
-    for(auto it = cE.begin(); it != cE.end(); it++)
+    for (auto it = cE.begin(); it != cE.end(); it++)
     {
         pag.insert(it->first, it->second);
         dominios[it->second].push_back(it->first);
     }
-        int cont = 0;
-    for(auto it = dominios.rbegin(); it != dominios.rend(); it++)
+    int cont = 0;
+    for (auto it = dominios.rbegin(); it != dominios.rend(); it++)
     {
-        if(cont < n)
+        if (cont < n)
         {
             cout << it->first << ":";
-            for(string s : dominios[it->first])
+            for (string s : dominios[it->first])
             {
                 cout << s << ", ";
-                cont++;          
+                cont++;
             }
-            if(cont >= n)
+            if (cont >= n)
             {
                 cout << endl;
                 return true;
-            } 
+            }
             cout << endl;
         }
         else
-        {
             return true;
-        }            
     }
     return false;
 }
@@ -139,9 +127,9 @@ int main(int argc, char const *argv[])
     importarDatos("equipo 4.csv");
     vector<string> fechas;
     fechas.push_back(conexiones[0].fecha);
-    for(Conexion a : conexiones)
+    for (Conexion a : conexiones)
     {
-        if(fechas[fechas.size()-1] != a.fecha)
+        if (fechas[fechas.size() - 1] != a.fecha)
             fechas.push_back(a.fecha);
     }
     for (int i = 0; i < fechas.size(); i++)
@@ -153,6 +141,3 @@ int main(int argc, char const *argv[])
 
     return 0;
 }
-
-
-

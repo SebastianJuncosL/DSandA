@@ -230,11 +230,11 @@ public:
         }
         inorderByLevel(root, level, 1, value);
     }
-    void inorderByLevel(Node<T> *p, int desired, int currentL,T searched)
+    void inorderByLevel(Node<T> *p, int desired, int currentL, T searched)
     {
         if (p)
         {
-            if (currentL == desired && p->value!= searched)
+            if (currentL == desired && p->value != searched)
                 std::cout << p->value << endl;
             currentL++;
             inorderByLevel(p->lchild, desired, currentL, searched);
